@@ -2,7 +2,7 @@ import { Component } from "react";
 import { nanoid } from 'nanoid';
 
 import ContactFormrm from "./Form/ContactForm";
-import { number } from "yup";
+import ContactsList from "./ContactsList/ContactsList";
 
 
 export class App extends Component {
@@ -29,13 +29,14 @@ export class App extends Component {
           height: '100vh',
           display: 'flex',
           flexDirection: "column",
-          alignItems: 'center',
+          alignItems: 'start',
           fontSize: 40,
           color: '#010101'
         }}
       >
         React homework template
         <ContactFormrm name={name} number={number} />
+        <ContactsList contacts={contacts} />
       </div>
     );
   };
