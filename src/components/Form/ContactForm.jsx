@@ -8,23 +8,22 @@ const schema = yup.object().shape({
     name: yup.string().required(),
     number: yup.string().required()
 });  
-   
-const contactId = nanoid();
+
 
 const initialValues = {
+    id: "",
         name: '',
     number: "",
-        id: contactId,
 };
-
 export default function ContactFormrm( propa ) {
     // console.log(propa)
-    const handleSubmit = (values, {resetForm}) => {
+    const handleSubmit = (values, { resetForm }) => {
+        values.id = nanoid()
         resetForm();
         console.log(values);
         propa.onSubmit(values);
     };
-
+    
     return (
         <>
         <h2 style={{fontSize: "25px"}}>Phonebook</h2>
@@ -32,12 +31,12 @@ export default function ContactFormrm( propa ) {
             <FormContainer autoComplete="off">
                 <Label htmlFor="name">
                     <Span>Name</Span>
-                    <Input type="text" name="name" id={contactId}/>
+                        <Input type="text" name="name"  />
                     <ErrorMessage name='name' component="div"/> 
                 </Label>
                  <Label htmlFor="number">
                   <Span>Number</Span>
-                    <Input type="tel" name="number"  />
+                    <Input type="tel" name="number" />
                     <ErrorMessage name='number' component="div"/> 
                 </Label>
                 <BtnAdd type="submit">Add contact</BtnAdd>
