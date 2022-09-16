@@ -2,22 +2,27 @@ import { Formik, ErrorMessage  } from 'formik';
 // import styled from 'styled-components';
 import { FormContainer, BtnAdd, Label, Span, Input } from './Form.styled';
 import * as yup from 'yup';
+import { nanoid } from 'nanoid';
 
 const schema = yup.object().shape({
     name: yup.string().required(),
-    number: yup.string().min(7).max(7).required()
+    number: yup.string().required()
 });  
    
+const contactId = nanoid();
+
 const initialValues = {
         name: '',
-        number: ""
-    };
+    number: "",
+        id: contactId,
+};
 
 export default function ContactFormrm () {
     
     const handleSubmit = (values, {resetForm}) => {
+        resetForm();
         console.log(values)
-        resetForm()
+        return values
     };
 
     return (
@@ -27,12 +32,12 @@ export default function ContactFormrm () {
             <FormContainer autoComplete="off">
                 <Label htmlFor="name">
                     <Span>Name</Span>
-                    <Input type="text" name="name"/>
+                    <Input type="text" name="name" id={contactId}/>
                     <ErrorMessage name='name' component="div"/> 
                 </Label>
                  <Label htmlFor="number">
                   <Span>Number</Span>
-                    <Input type="tel" name="number"/>
+                    <Input type="tel" name="number"  />
                     <ErrorMessage name='number' component="div"/> 
                 </Label>
                 <BtnAdd type="submit">Add contact</BtnAdd>

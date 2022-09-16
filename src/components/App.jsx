@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { nanoid } from 'nanoid';
+
 
 import ContactFormrm from "./Form/ContactForm";
 import ContactsList from "./ContactsList/ContactsList";
@@ -19,6 +19,8 @@ export class App extends Component {
   ],
    
   };
+
+  
 
   render() {
     const {name, number, filter, contacts} = this.state
