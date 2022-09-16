@@ -17,12 +17,12 @@ const initialValues = {
         id: contactId,
 };
 
-export default function ContactFormrm () {
-    
+export default function ContactFormrm( propa ) {
+    // console.log(propa)
     const handleSubmit = (values, {resetForm}) => {
         resetForm();
-        console.log(values)
-        return values
+        console.log(values);
+        propa.onSubmit(values);
     };
 
     return (
