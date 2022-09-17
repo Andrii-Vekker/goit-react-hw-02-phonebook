@@ -20,15 +20,14 @@ export class App extends Component {
     }));
   };
 
-     handleChange = (e) => {
-       const { name, number } = e.target;
-       this.setState({[name]:number})
-}
+
+  changeFilter = (data) => {
+        this.setState({filter: data })
+    }
   
   render() {
-    const {addContacts, handleChange} = this
-    const { name, number, filter, contacts } = this.state;
-
+    const {addContacts, changeFilter} = this
+    const { filter, contacts } = this.state;
     return (
       <div
         style={{
@@ -43,7 +42,7 @@ export class App extends Component {
       >
         React homework template
         <ContactFormrm onSubmit={addContacts}  />
-        <ContactsList contacts={contacts} handleChange={handleChange} />
+        <ContactsList contacts={contacts} filter={filter} changeFilter={changeFilter} />
       </div>
     );
   };

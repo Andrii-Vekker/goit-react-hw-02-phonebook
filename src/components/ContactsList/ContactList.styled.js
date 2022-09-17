@@ -8,7 +8,7 @@ justify-content: start;
 align-items: start
 `;
 
-export const FilteredInput = styled.button`
+export const FilteredInput = styled.input`
 width: 200px;
 height: 20px;
 margin-top: 10px;

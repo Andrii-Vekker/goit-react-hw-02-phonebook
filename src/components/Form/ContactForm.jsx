@@ -16,7 +16,6 @@ const initialValues = {
     number: "",
 };
 export default function ContactFormrm( propa ) {
-    // console.log(propa)
     const handleSubmit = (values, { resetForm }) => {
         values.id = nanoid()
         resetForm();
