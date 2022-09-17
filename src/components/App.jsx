@@ -1,10 +1,9 @@
 import { Component } from "react";
-// import { nanoid } from 'nanoid';
 
 import ContactFormrm from "./Form/ContactForm";
 import ContactsList from "./ContactsList/ContactsList";
+import Filter from "./Filter/Filter";
 
-// const idx = nanoid()
 export class App extends Component {
 
   state = {
@@ -13,21 +12,59 @@ export class App extends Component {
   };
 
   addContacts = (data) => {
+    if (this.isDuplicate(data)) {
+      return alert(`${data.name} is allready in contacts`);
+    };
     this.setState((prev) => ({
       
-       contacts: [...prev.contacts, data]
+      contacts: [...prev.contacts, data]
       
     }));
   };
 
+  removeContacts = (id) => {
+    this.setState((prev) => {
+      const newContacts = prev.contacts.filter((item) => item.id !== id);
+      return { contacts: newContacts };
+    });
+  };
 
-  changeFilter = (data) => {
-        this.setState({filter: data })
-    }
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  
+    filteredContacts()  {
+      const { contacts, filter } = this.state;
+      
+      if (!filter) {
+        return contacts;
+      };
+
+        const normalizedFilter = filter.toLocaleLowerCase();
+        const filteredContacts = contacts.filter(({ name, number }) => {
+        const normName = name.toLocaleLowerCase();
+        const normNum = number.toLocaleLowerCase();
+        const result = normName.includes(normalizedFilter) || normNum.includes(normalizedFilter);
+        return result
+      });
+      return filteredContacts;
+  };
+
+    isDuplicate ({name, number}) {
+      const { contacts } = this.state;
+      const result = contacts.find(item => item.name === name && item.number === number);
+      return result;
+  };
+   
   
   render() {
-    const {addContacts, changeFilter} = this
-    const { filter, contacts } = this.state;
+    const {addContacts, handleChange, removeContacts} = this
+    const { filter, } = this.state;
+    const contacts = this.filteredContacts()
     return (
       <div
         style={{
@@ -41,8 +78,13 @@ export class App extends Component {
         }}
       >
         React homework template
+        <h2 style={{fontSize: "25px"}}>Phonebook</h2>
         <ContactFormrm onSubmit={addContacts}  />
-        <ContactsList contacts={contacts} filter={filter} changeFilter={changeFilter} />
+        <h2 style={{ fontSize: "25px" }}>Contacts</h2>
+        <Filter filter={filter} handleChange={handleChange}/>
+        <ContactsList contacts={contacts}  removeContacts={removeContacts}  />
+
+            
       </div>
     );
   };

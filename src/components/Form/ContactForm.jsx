@@ -1,14 +1,18 @@
 import { Formik, ErrorMessage  } from 'formik';
-// import styled from 'styled-components';
 import { FormContainer, BtnAdd, Label, Span, Input } from './Form.styled';
 import * as yup from 'yup';
 import { nanoid } from 'nanoid';
 
 const schema = yup.object().shape({
-    name: yup.string().required(),
-    number: yup.string().required()
-});  
-
+    name: yup.string().required("Please enter your name"),
+    number: yup.string().trim().min(7).max(7)
+    .required("Please enter your tel")
+    .matches(
+      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/ ,
+      "Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+    ),
+    
+});
 
 const initialValues = {
     id: "",
@@ -22,10 +26,10 @@ export default function ContactFormrm( propa ) {
         console.log(values);
         propa.onSubmit(values);
     };
+
     
     return (
         <>
-        <h2 style={{fontSize: "25px"}}>Phonebook</h2>
         <Formik validationSchema={schema} onSubmit={handleSubmit} initialValues={initialValues}>
             <FormContainer autoComplete="off">
                 <Label htmlFor="name">
@@ -35,7 +39,7 @@ export default function ContactFormrm( propa ) {
                 </Label>
                  <Label htmlFor="number">
                   <Span>Number</Span>
-                    <Input type="tel" name="number" />
+                        <Input type="tel" name="number" />
                     <ErrorMessage name='number' component="div"/> 
                 </Label>
                 <BtnAdd type="submit">Add contact</BtnAdd>
