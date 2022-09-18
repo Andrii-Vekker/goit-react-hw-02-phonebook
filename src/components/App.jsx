@@ -63,7 +63,7 @@ export class App extends Component {
   
   render() {
     const {addContacts, handleChange, removeContacts} = this
-    const { filter, } = this.state;
+    const { filter } = this.state;
     const contacts = this.filteredContacts()
     return (
       <div
@@ -83,8 +83,7 @@ export class App extends Component {
         <h2 style={{ fontSize: "25px" }}>Contacts</h2>
         <Filter filter={filter} handleChange={handleChange}/>
         <ContactsList contacts={contacts}  removeContacts={removeContacts}  />
-
-            
+           
       </div>
     );
   };
