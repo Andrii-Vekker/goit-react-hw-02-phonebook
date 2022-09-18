@@ -2,7 +2,7 @@
 import { List, Item } from "./ContactList.styled";
 import { BtnAdd } from "components/Form/Form.styled";
 import { nanoid } from 'nanoid';
-
+import PropTypes from 'prop-types';
 
 
 export default function ContactsList({ contacts, removeContacts }) {
@@ -25,4 +25,14 @@ export default function ContactsList({ contacts, removeContacts }) {
     );
 };
 
-
+ContactsList.propTypes = {
+    removeContacts: PropTypes.func.isRequired,
+    contacts: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            number: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
+        })
+    )
+};
+    

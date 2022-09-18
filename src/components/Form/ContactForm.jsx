@@ -2,6 +2,7 @@ import { Formik, ErrorMessage  } from 'formik';
 import { FormContainer, BtnAdd, Label, Span, Input } from './Form.styled';
 import * as yup from 'yup';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 
 const schema = yup.object().shape({
     name: yup.string().required("Please enter your name"),
@@ -19,7 +20,7 @@ const initialValues = {
         name: '',
     number: "",
 };
-export default function ContactFormrm( propa ) {
+export default function ContactFormrm(propa) {
     const handleSubmit = (values, { resetForm }) => {
         values.id = nanoid()
         resetForm();
@@ -48,3 +49,7 @@ export default function ContactFormrm( propa ) {
             </>
     );
 };
+
+ContactFormrm.propTypes = {
+    propa: PropTypes.func,
+}
