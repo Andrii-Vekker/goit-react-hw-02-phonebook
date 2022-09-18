@@ -1,7 +1,6 @@
 
 import { List, Item } from "./ContactList.styled";
 import { BtnAdd } from "components/Form/Form.styled";
-import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 
 
@@ -14,7 +13,7 @@ export default function ContactsList({ contacts, removeContacts }) {
             <List>
                 {contacts.map(({ name, number, id }) => (
                 
-                    <Item key={nanoid()}>{name} : {number}
+                    <Item key={id}>{name} : {number}
                         <BtnAdd type="button" onClick={() => removeContacts(id)}>Delete
                         </BtnAdd>
                     </Item>

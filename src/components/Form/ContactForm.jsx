@@ -24,7 +24,6 @@ export default function ContactFormrm(propa) {
     const handleSubmit = (values, { resetForm }) => {
         values.id = nanoid()
         resetForm();
-        console.log(values);
         propa.onSubmit(values);
     };
 
@@ -51,5 +50,5 @@ export default function ContactFormrm(propa) {
 };
 
 ContactFormrm.propTypes = {
-    propa: PropTypes.func,
+    onSubmit: PropTypes.func.isRequired,
 }

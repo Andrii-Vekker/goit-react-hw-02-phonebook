@@ -44,15 +44,15 @@ export class App extends Component {
         return contacts;
       };
 
-        const normalizedFilter = filter.toLocaleLowerCase();
-        const filteredContacts = contacts.filter(({ name, number }) => {
-        const normName = name.toLocaleLowerCase();
-        const normNum = number.toLocaleLowerCase();
-        const result = normName.includes(normalizedFilter) || normNum.includes(normalizedFilter);
+      const normalizedFilter = filter.toLowerCase();
+        const filteredContacts = contacts.filter(({ name }) => {
+        const normName = name.toLowerCase();
+          const result = normName.includes(normalizedFilter) 
         return result
-      });
-      return filteredContacts;
+        });
+      return filteredContacts
   };
+
 
     isDuplicate ({name, number}) {
       const { contacts } = this.state;
