@@ -12,17 +12,22 @@ export class App extends Component {
   };
 
   addContacts = (data) => {
-    if (this.isDuplicate(data)) {
-      return alert(`${data.name} is allready in contacts`);
-    };
-    this.setState((prev) => ({
+    // if (this.isDuplicate(data)) {
+    //   return alert(`${data.name} is allready in contacts`);
+    // };
+    // this.setState((prev) => ({
       
-      contacts: [...prev.contacts, data]
+    //   contacts: [...prev.contacts, data]
       
-    }));
+    // }));
+    this.state.contacts.some(contact => contact.name.toLowerCase() === data.name.toLowerCase()) ?
+      alert(`${data.name} is allready in contacts`) :
+      this.setState((prev) => ({
+        contacts: [...prev.contacts, data]
+      }));
   };
 
-  removeContacts = (id) => {
+    removeContacts = (id) => {
     this.setState((prev) => {
       const newContacts = prev.contacts.filter((item) => item.id !== id);
       return { contacts: newContacts };
@@ -37,7 +42,7 @@ export class App extends Component {
   };
 
   
-    filteredContacts()  {
+    filteredContacts ()  {
       const { contacts, filter } = this.state;
       const normalizedFilter = filter.toLowerCase();
       return contacts.filter(contact => contact.name.toLowerCase()
