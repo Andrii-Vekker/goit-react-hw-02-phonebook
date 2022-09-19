@@ -39,18 +39,9 @@ export class App extends Component {
   
     filteredContacts()  {
       const { contacts, filter } = this.state;
-      
-      if (!filter) {
-        return contacts;
-      };
-
       const normalizedFilter = filter.toLowerCase();
-        const filteredContacts = contacts.filter(({ name }) => {
-        const normName = name.toLowerCase();
-          const result = normName.includes(normalizedFilter) 
-        return result
-        });
-      return filteredContacts
+      return contacts.filter(contact => contact.name.toLowerCase()
+        .includes(normalizedFilter))
   };
 
 
@@ -64,7 +55,8 @@ export class App extends Component {
   render() {
     const {addContacts, handleChange, removeContacts} = this
     const { filter } = this.state;
-    const contacts = this.filteredContacts()
+    const visibleContacts = this.filteredContacts()
+    
     return (
       <div
         style={{
@@ -82,7 +74,7 @@ export class App extends Component {
         <ContactFormrm onSubmit={addContacts}  />
         <h2 style={{ fontSize: "25px" }}>Contacts</h2>
         <Filter filter={filter} handleChange={handleChange}/>
-        <ContactsList contacts={contacts}  removeContacts={removeContacts}  />
+        <ContactsList contacts={visibleContacts}  removeContacts={removeContacts}  />
            
       </div>
     );
